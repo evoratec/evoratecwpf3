@@ -1,0 +1,5 @@
+/* Modificaciones para ie 8 de evoratec adicionales a Foundation */
+
+	.responsive-menu li a {
+		padding: 5px 5px;
+	}
