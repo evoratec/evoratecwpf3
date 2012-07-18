@@ -39,5 +39,5 @@ For more information about the licensing involved with Foundation, for WordPress
 * [ZURB's Foundation Framework](http://foundation.zurb.com/) (MIT Open License)
 * [HTML5 Boilerplate](http://html5boilerplate.com/) (Public Domain)
 * [FlexSlider from woothemes](http://www.woothemes.com/flexslider/) (Public Domain)
-* [Less php compiler](http://http://leafo.net/lessphp/)
+* [Less php compiler](http://leafo.net/lessphp/)
 
