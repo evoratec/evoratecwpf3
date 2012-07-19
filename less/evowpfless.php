@@ -20,6 +20,7 @@ function lesscss_include() {
 }
 
 function evowpf_less_css( $less = "", $args = array() ) {
+    if (is_admin()) return ;
 
     $defaults = array( 'media' => 'all', 'minify' => false, 'mobile' => false, 'hide_mobile' => false, 'force' => true );
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
@@ -38,6 +39,7 @@ function evowpf_less_css( $less = "", $args = array() ) {
     }
 
     $name = str_replace( '.', '', $less ) . "_css";
+
     wp_enqueue_style( $name, get_bloginfo( 'stylesheet_directory' ) . '/' . $output_name, false, false, $media );
 
 }

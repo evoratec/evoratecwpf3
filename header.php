@@ -46,7 +46,7 @@
 <body <?php body_class(); ?>>
 
 	<!-- Begin Container -->
-	<div class="container">
+	<div class="container evowpf3">
 	
 		<?php
 		evoratec_header();

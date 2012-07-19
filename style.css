@@ -195,7 +195,7 @@ ojo ocn los media queries
 
 
 .flexslider .slides  { padding: 0; margin: 0px; }
-.flexslider .slides > li {display: none; 
+.flexslider .slides > li {display: none; list-style-type:  none ;
 	} /* Hide the slides before the JS is loaded. Avoids image jumping */
 .flexslider .slides img {max-width: 100%; display: block; margin : 0 auto;}
 .flex-pauseplay span {text-transform: capitalize;}
@@ -252,7 +252,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4C000000,endCol
 /* Control Nav */
 .flex-control-nav { margin: 7px 0 0; text-align: center; width: 100%; }
 
-.flex-control-nav li { display: inline; margin: 0 7px; }
+.flex-control-nav li { display: inline; margin: 0 7px;  }
 .flex-control-nav li { }
 .flex-control-nav li a {
 	background: #fff;
@@ -309,7 +309,8 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4C000000,endCol
 
 /* Media queries */
 
-@media only screen and (min-width: 767px) {
+
+@media only screen and (max-width: 800px) {
 	
 	#menu-header {
 		visibility: visible;
@@ -319,29 +320,17 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4C000000,endCol
 		display: none
 	}
 	/*.flex-nav-container  {   position: relative; margin: 0 auto; width: 100%;}*/
-	
+    .responsive-menu li a {
+        font-size: 0.7em ;
+    }
+    .row {
+        min-width: 100%;
+    }
 
 }
 
 
-@media only screen and (max-width: 980px) {
-	 #row-footer, #row-content {
-		padding: 0 20px;
-	}
-	#access hgroup#header {
-	padding: 0 20px;
-	}
-	
-	.flex-nav-container  {   position: relative; margin: 0 auto; width: 100%; }
-	.flex-direction-nav {
-		left: 20px;
-	}
-	.flexslider .slides .slide .slide-content-container  {   position: relative;  margin: 0 auto; width: 100%; }
 
-	
-		
-
-} 
 
 /* iphone */
 @media only screen and (max-width: 767px) {
@@ -369,11 +358,14 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4C000000,endCol
 	.flex-nav-container  {   position: relative; margin: 0 auto; width: 100%;}
 	.responsive-menu > li { float: left; margin-right: 0px;  display: block; }
 	.responsive-menu li { width: 100%; overflow: hidden;}
-	
+    .responsive-menu li a {
+        font-size: 1em ;
+        padding-left: 0px ;
+    }
 	
 	.responsive-menu { padding: 0; margin: 0; }
 	.responsive-menu li ul { position: relative; left: 0; top: 0; display: block;  overflow: hidden; }
-	.responsive-menu li ul li a { padding-left: 5px;}
+	.responsive-menu li ul li a { padding-left: 5px; font-size: 1em;}
 	.responsive-menu li:hover > ul { display: block; }
 	
 	.flex-direction-nav li .next {

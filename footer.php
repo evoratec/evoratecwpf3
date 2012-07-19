@@ -3,9 +3,9 @@
 	<!-- Footer -->
 	
 	<div id="row-footer">
-	    <div class="row footer">
+	    <div class="row">
 	
-            <footer class="row">
+            <footer>
                 <?php // evora_footer(); ?>
                 <hr>
                 <?php if (!function_exists('dynamic_sidebar') || !dynamic_sidebar('Footer Sidebar')) : ?>
