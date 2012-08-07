@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-	
+<div class="row">
 	<div class="twelve columns centered">
 	<div class="alert-box error">404!</div>
 
@@ -9,7 +9,7 @@
 	<?php get_search_form(); ?>
 	
 	<a href="<?php echo home_url( '/' ); ?>">&larr; Go Home?</a>
+</div>
 
-<?php get_sidebar(); ?>
 		
 <?php get_footer(); ?>
