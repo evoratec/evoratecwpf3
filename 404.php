@@ -2,8 +2,8 @@
 	
 	<div class="twelve columns centered">
 	<div class="alert-box error">404!</div>
-	<h1>!@!#@$@@!!</h1>  
-	<p>404's are such a lovely thing. But you know, I'm not going to leave you stranded.</p>
+
+	<p> <?php _e('La página no ha sido encontrada','evoratecwpf3'); ?></p>
 	<p>Why don't you try a search?</p>
 	
 	<?php get_search_form(); ?>

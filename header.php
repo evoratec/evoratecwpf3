@@ -41,6 +41,8 @@
     <script src="<?php bloginfo('template_url'); ?>/javascripts/modernizr.foundation.js"></script>
 	<?php wp_head(); ?>
 
+
+
 </head>
 
 <body <?php body_class(); ?>>

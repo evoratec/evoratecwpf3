@@ -6,6 +6,13 @@ define(THEMEEVORA, dirname(__FILE__));
 require_once( THEMEEVORA .'/less/lessc.inc.php');
 require_once (THEMEEVORA . '/less/evowpfless.php');
 
+// Localización del tema / theme localization
+add_action('after_setup_theme', 'evoratec_lenguaje_theme');
+function evoratec_lenguaje_theme(){
+    load_theme_textdomain('evoratecwpf3', get_template_directory() . '/languages');
+}
+
+
 
 //Añadimos soporte para los menús de wp 3.0
 add_theme_support( 'nav-menus' );
@@ -15,9 +22,6 @@ add_theme_support('post-thumbnails');
 add_filter('widget_text', 'do_shortcode');
 
 $dirtemplate = get_bloginfo('template_directory');
-
-
-
 
 
 // ---------- "Child Theme Options" menu STARTS HERE

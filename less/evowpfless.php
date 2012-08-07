@@ -10,7 +10,7 @@ Tested up to: 3.2.1
 */
 define(STYLESHEETPATH,get_stylesheet_directory() );
 
-add_action( 'after_setup_theme', 'lesscss_include' );
+add_action( 'after_setup_theme', 'lesscss_include',5);
 
 
 function lesscss_include() {
