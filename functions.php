@@ -13,10 +13,12 @@ function evoratec_lenguaje_theme(){
 }
 
 
-
 //Añadimos soporte para los menús de wp 3.0
-add_theme_support( 'nav-menus' );
+add_theme_support('nav-menus' );
 add_theme_support('post-thumbnails');
+// Add theme support for Automatic Feed Links
+
+add_theme_support( 'automatic-feed-links' );
 
 // Habilita los shortcodes en los widgets de texto
 add_filter('widget_text', 'do_shortcode');
@@ -170,10 +172,12 @@ function evora_slider() {
 	
 	 
 	 		
-		echo '</ul></div><div class="flex-nav-container"></div><div class="pie-slider"><img src="http://evoratecwpf:8888/wp-content/themes/evoratecwpfc/imagenes/fondo-slider.png"/></div>';
-		
+		echo '</ul></div><div class="flex-nav-container"></div>';
 
-		echo '<script type="text/javascript">
+  //  echo '</ul></div><div class="flex-nav-container"></div><div class="pie-slider"><img src="http://evoratecwpf:8888/wp-content/themes/evoratecwpfc/imagenes/fondo-slider.png"/></div>';
+
+
+    echo '<script type="text/javascript">
 		   jQuery(window).load(function() {
 		   	jQuery(".flexslider").flexslider({
 		   		/* slideDirection: "", */
@@ -206,7 +210,10 @@ function remove_generators() {
 	return '';
 }		
 add_filter('the_generator','remove_generators');
-
+// evoratec
+function evoratec_before_header() {
+    do_action('evoratec_before_header');
+}
 // evoratec
 function evoratec_header() {
 	do_action('evoratec_header');
@@ -261,30 +268,20 @@ function menu_evora() {
 	do_action('menu_evora');
 }
 
-function menu_principal(){
-	?>
-	<div id="menu-movil">
-		<p><a class="nav-js active button " href="">Menu</a></p>
-	</div>
+function menu_principal(){ ?>
+
 
 	<div id="menu-header">					
     <?php  wp_nav_menu( array( 'theme_location' => 'menu_principal',
                                'menu'=>'menu_es',
                                 'menu_class' => 'responsive-menu',
                                 'walker'=> new menu_walker()) );
-
-
-
 	?>
 	</div>
 	<?php
 }
 add_action('menu_evora','menu_principal');
 
-
-// Add thumbnail support
-
-add_theme_support( 'post-thumbnails' );
 
 // Disable the admin bar, set to true if you want it to be visible.
 
@@ -294,13 +291,8 @@ show_admin_bar(FALSE);
 
 include('shortcodes.php');
 
-// Add theme support for Automatic Feed Links
 
-add_theme_support( 'automatic-feed-links' );
 
-// Custom Navigation
-
-add_theme_support('nav-menus');
 
 if ( function_exists( 'register_nav_menus' ) ) {
 	register_nav_menus(
@@ -327,18 +319,39 @@ if (function_exists('register_sidebar')) {
 		'after_title' => '</h4>',
 	));
 	
-	// Footer Sidebar
+	//  Sidebar
 	
 	register_sidebar(array(
-		'name'=> 'Footer Sidebar',
+		'name'=> 'Pie',
 		'id' => 'footer_sidebar',
-		'before_widget' => '<div id="%1$s" class=" columns %2$s">',
+		'before_widget' => '<div id="%1$s" class=" %2$s">',
 		'after_widget' => '</div>',
 		'before_title' => '<h4>',
 		'after_title' => '</h4>',
 	));
+    register_sidebar(array(
+        'name'=> 'Front Page SideBar Left',
+        'id' => 'fps_left',
+        'before_widget' => '',
+        'after_widget' => '',
+        'before_title' => '<h4>',
+        'after_title' => '</h4>',
+    ));
 }
 
+
+function evora_frontpage_sidebar_init(){
+
+    echo '<div class="row">';
+
+    if ( is_active_sidebar( 'fps_left' ) ) {
+        echo '<div class="six columns">';
+        dynamic_sidebar( 'fps_left' );
+        echo '</div>';
+    }
+    echo '</div>';
+}
+add_action('evora_frontpage_sidebar','evora_frontpage_sidebar_init');
 // Comments
 
 // Custom callback to list comments in the Foundation style
@@ -379,37 +392,6 @@ function evoratecwp_excerpt_more($more) {
 }
 add_filter('excerpt_more', 'evoratecwp_excerpt_more');
 
-
-// Custom callback to list pings
-function custom_pings($comment, $args, $depth) {
-       $GLOBALS['comment'] = $comment;
-        ?>
-            <li id="comment-<?php comment_ID() ?>" <?php comment_class() ?>>
-                <div class="comment-author"><?php printf(__('By %1$s on %2$s at %3$s', 'Foundation'),
-                        get_comment_author_link(),
-                        get_comment_date(),
-                        get_comment_time() );
-                        edit_comment_link(__('Edit', 'Foundation'), ' <span class="meta-sep">|</span> <span class="edit-link">', '</span>'); ?></div>
-    <?php if ($comment->comment_approved == '0') _e('\t\t\t\t\t<span class="unapproved">Your trackback is awaiting moderation.</span>\n', 'Foundation') ?>
-            <div class="comment-content">
-                <?php comment_text() ?>
-            </div>
-<?php } // end custom_pings
-
-// Produces an avatar image with the hCard-compliant photo class
-function commenter_link() {
-    $commenter = get_comment_author_link();
-    if ( ereg( '<a[^>]* class=[^>]+>', $commenter ) ) {
-        $commenter = ereg_replace( '(<a[^>]* class=[\'"]?)', '\\1url ' , $commenter );
-    } else {
-        $commenter = ereg_replace( '(<a )/', '\\1class="url "' , $commenter );
-    }
-    $avatar_email = get_comment_author_email();
-    $avatar = str_replace( "class='avatar", "class='photo avatar", get_avatar( $avatar_email, 35 ) );
-    echo $avatar . ' <span class="fn n">' . $commenter . '</span>';
-} // end commenter_link
-
-
 // Orbit, for WordPress
 
 add_action('init', 'Orbit');
@@ -436,8 +418,6 @@ function Orbit(){
 add_action( 'add_meta_boxes', 'orbit_create_slide_metaboxes' );
 /* Save meta box data. */
 add_action( 'save_post', 'orbit_slider_save_meta', 1, 2 );
-
-
 
 function orbit_create_slide_metaboxes() {
     add_meta_box( 'orbit_slider_metabox_1', __( 'Link', 'orbit-slider' ), 'orbit_slider_metabox_1', 'Orbit', 'normal', 'default' );
@@ -517,6 +497,8 @@ function evoratec_register_sidebars() {
 }
 add_action( 'init', 'evoratec_register_sidebars' );
 
+
+// Walker para crear los menús segun nuestras necesidades.
 class menu_walker extends Walker_Nav_Menu
 {
     function start_el(&$output, $item, $depth, $args)
@@ -569,31 +551,21 @@ function evora_meta_datos() {
     echo apply_filters('evora_meta_datos',$postmeta); // creamos el filtro
 }
 
-/*
-function evoratec_postmeta() {
 
-    $postmeta = '<div class="entry-meta">';
-    $postmeta .= thematic_postmeta_authorlink();
-    $postmeta .= '<span class="meta-sep meta-sep-entry-date"> | </span>';
-    $postmeta .= thematic_postmeta_entrydate();
-
-    $postmeta .= thematic_postmeta_editlink();
-
-    $postmeta .= "</div><!-- .entry-meta -->\n";
-
-    return apply_filters('evoratec_postmeta',$postmeta);
-
-}
-*/
-
+// Creamos acciones - Creating actions hooks
 
 function evora_footer(){
     do_action('evora_footer');
 }
 
+function evora_frontpage_sidebar(){
+    do_action('evora_frontpage_sidebar');
+}
+
+
 function evora_add_footer(){
 
-        echo '<div class="row twelve columns home-middle">';
+        echo '<div class="row"><div class="twelve columns home-middle">';
 
         if ( is_active_sidebar( 'pie_1' ) ) {
             echo '<div class="four columns">';
@@ -613,7 +585,7 @@ function evora_add_footer(){
             echo '</div>';
         }
 
-        echo '</div>';
+        echo '</div></div>';
 }
 add_action('evora_footer','evora_add_footer');
 

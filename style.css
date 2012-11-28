@@ -1,3 +1,4 @@
+/* @override http://evoratecwpf:8888/wp-content/themes/evoratecwpf3/style.css */
 
 /* 
 Theme Name: EvoratecWPF3
@@ -10,6 +11,29 @@ License: MIT License
 License URI: http://www.opensource.org/licenses/mit-license.php
 */
 /* tipografia */
+
+/*
+
+Modificación de foundation. Remove padding in columns
+
+*/
+.row {
+    width: 980px;
+}
+.column:first-child, .columns:first-child {
+    padding-left: 0;
+}
+.row .row {
+    margin: 0 ;
+}
+.twelve, .row .twelve {
+    padding:0 ;
+}
+[class*="column"] + [class*="column"]:last-child {
+    padding-right:0;
+}
+
+
 
 body {
 	color: #555;
@@ -32,16 +56,21 @@ h3 {
 }
 
 a {
-	color: #ff6000;
+    color: #333;
 }
 a:visited {
-	color: #ff6000;
+    color: #333;
 }
 
 a:hover {
-	color: #4e4e4e;
+    color: #333;
+
 }
 
+li {
+    list-style-position: inside ;
+    list-style-type: none ;
+}
 /*h3.widget-title {
 	background-color: #4e4e4e;
 	color: white;
@@ -82,26 +111,39 @@ ojo ocn los media queries
 .container {
 	padding: 0px;
 	/*background: url(http://www.zurb.com/assets/background/hp/3-47306c08c37b5c3f23ffae85458134e5.jpg) no-repeat fixed 50% 0;*/
-	text-shadow: #000000 50% 50% 0;
+
 }
 
 /* Header / Primary / Secondary Navigation
 ------------------------------------------------------------ */
 #row-header{
 	padding: 0px;
+    background: #333;
 
-	}
+}
 #header h1 {
+	color: white;
 	font-weight: normal;
-	font-style: normal;
+	font-style: normal;	
+}
+
+#header h1 a {
+	color: white;
+}
+#header h1 a:visited {
+	color: white;
+}
+#header h1 a:hover {
+	color: white;
 }
 #access {
 	z-index: 1;
 	margin-bottom: 10px;
-	
+	margin-top: 20px;
 }
 #menu-header {
 	float: left;
+    margin: 15px 0 10px 0;
 	width: 100%;
 	z-index: 1;
 }
@@ -115,17 +157,18 @@ ojo ocn los media queries
 .responsive-menu ul { }
 
 .responsive-menu ul a {  }
-.responsive-menu ul a:hover {}
+.responsive-menu ul a:hover { }
 
 
 
 .responsive-menu { line-height: 2rem; color: #fff; text-decoration: none;}
-.responsive-menu a:hover { }
-.responsive-menu a.active {background-color: #eee; color: #fff;  }
 
-.responsive-menu a {
-		}
+.responsive-menu a:active { color: #fff;  }
 
+.responsive-menu a:visited {
+    color: white ;
+}
+.responsive-menu a:hover { color: #333; background: white;}
 
 
 .responsive-menu > li { float: left; margin-right: 10px; }
@@ -145,9 +188,9 @@ ojo ocn los media queries
 
 /* Botones */
 .evomenulink { 	
-			 display: inline-block; 
+		display: inline-block;
 			 padding: 5px 15px 6px; 
-						 font-size: 1em; 
+			    font-size: 1em;
 			 
 			 line-height: 1; 
 			 text-decoration: none; 
@@ -156,16 +199,6 @@ ojo ocn los media queries
 			 overflow: visible; 
 			 width: auto;
 			 
-			 
-			  }
-
-.evomenulink a:hover { 	
-			 color: white!important;			 
-			 
-			  }
-
-.evomenulink a:active { 	
-			 color: white!important;			 
 			 
 			  }
 
@@ -190,18 +223,15 @@ ojo ocn los media queries
 }
 
  /* FlexSlider Necessary Styles
-*********************************/ 
-
-
-
+*********************************/
 .flexslider .slides  { padding: 0; margin: 0px; }
 .flexslider .slides > li {display: none; list-style-type:  none ;
 	} /* Hide the slides before the JS is loaded. Avoids image jumping */
 .flexslider .slides img {max-width: 100%; display: block; margin : 0 auto;}
-.flex-pauseplay span {text-transform: capitalize;}
+.flex-pauseplay span {text-transform: capitalize; }
 
 /* Clearfix for the .slides element */
-// .flexslider .slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;}
+
 .flexslider .slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;}
 html[xmlns] .slides {display: block;}
 * html .slides {height: 1%}
@@ -220,7 +250,10 @@ body.flexdemobody .flexslider  { min-height: 170px; }
 }
 .flexslider .slides {zoom: 1;}
 
-.flexslider .slides > li {position: relative;}
+.flexslider .slides > li {
+    position: relative;
+
+}
 /* Suggested container for "Slide" animation setups. Can replace this with your own, if you wish */
 
 .flex-container {zoom: 1; position: relative;}
@@ -231,6 +264,9 @@ body.flexdemobody .flexslider  { min-height: 170px; }
 filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4C000000,endColorstr=#4C000000); zoom: 1;}
 .flex-caption {width: 96%; padding: 2%; position: absolute; left: 0; bottom: 0; background: rgba(0,0,0,.6); color: #fff; text-align: center; text-shadow: 0 -1px 0 rgba(0,0,0,.3); font-size: 14px; line-height: 18px;}
 
+
+.flex-nav-container  {   position: relative; margin: 0 auto; width: 980px; z-index: 999;}
+
 /* Direction Nav */
 .flex-direction-nav {*height: 0; padding: 0 ;} /*fix for IE 7 */
 .flex-direction-nav {
@@ -239,10 +275,11 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4C000000,endCol
  	height: 70px;
  	top: 0px;
  	position: absolute;
+    list-style-type: none ;
  }
-.flex-direction-nav li a {width: 26px; height: 26px;  display: block; background: url(http://www.woothemes.com/wp-content/themes/woo/images/flex/bg_direction_nav.png) no-repeat 0 0; position: absolute;  cursor: pointer; text-indent: -9999px; opacity: 0.8; filter:alpha(opacity=80); }
+.flex-direction-nav li a {width: 26px; height: 26px; list-style-type: none; display: block; background: url(http://www.woothemes.com/wp-content/themes/woo/images/flex/bg_direction_nav.png) no-repeat 0 0; position: absolute;  cursor: pointer; text-indent: -9999px; opacity: 0.8; filter:alpha(opacity=80); }
 .flex-direction-nav li a:hover  { opacity: 1; filter:alpha(opacity=100); }
-.flex-direction-nav li .next {background-position: -30px 0; top: 0px; right: 0px; }
+.flex-direction-nav li .next {background-position: -30px 0; top: 0px; right: 0px;  }
 .flex-direction-nav li .prev {top: 0px;}
 .flex-direction-nav li .disabled {opacity: .3; filter:alpha(opacity=30); cursor: default;}
 
@@ -273,8 +310,8 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4C000000,endCol
 
 
 
-.flex-nav-container  {   position: relative; margin: 0 auto; width: 980px; z-index: 999;}
-.flexslider .slides .slide .slide-content-container  {   position: relative;  margin: 0 auto; width: 980px;}
+
+.flexslider .slides .slide .slide-content-container  {   position: relative;  margin: 0 auto; width: 980px}
 
 .flexslider  article header {
     position: absolute;
@@ -309,35 +346,58 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4C000000,endCol
 
 /* Media queries */
 
+/*Ipad y tablets */
 
 @media only screen and (max-width: 800px) {
-	
+    .row {
+        padding: 0 20px;
+    }
+
 	#menu-header {
 		visibility: visible;
 		display: inline;
+
 	}
 	#menu-movil {
 		display: none
 	}
 	/*.flex-nav-container  {   position: relative; margin: 0 auto; width: 100%;}*/
+
     .responsive-menu li a {
-        font-size: 0.7em ;
+        font-size: 1em ;
     }
     .row {
         min-width: 100%;
     }
-
+	.flexslider  article header {
+    	position: absolute;
+    	bottom: 30px;
+   
+	}
+	.flexslider  article header h1 {
+		font-size: 1.5em;
+	}
+	.flex-direction-nav {
+		left: 10px;
+ 	}
+    .flex-nav-container  {   position: relative; margin: 0 auto; width: 100%;}
+    .flexslider .slides .slide .slide-content-container  {   position: relative;  margin: 0 auto; width: 100%; }
 }
 
+/* Content */
+#row-content .entry ul li {
+    list-style-position: inside;
+}
 
-
-
-/* iphone */
+/* iphone y todo por debajo de 768px*/
 @media only screen and (max-width: 767px) {
-	#row-header, #row-footer, #row-content {
-	padding: 0 20px;
-	
-	}
+    .row {
+        padding: 0 10px;
+    }
+/*	#row-header, #row-footer, #row-content {
+	padding: 0 10px;
+
+	}*/
 	#access hgroup#header {
 		padding: 0 ;
 	}
@@ -363,7 +423,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4C000000,endCol
         padding-left: 0px ;
     }
 	
-	.responsive-menu { padding: 0; margin: 0; }
+	.responsive-menu { padding: 0; margin: 15px 0 0 0; }
 	.responsive-menu li ul { position: relative; left: 0; top: 0; display: block;  overflow: hidden; }
 	.responsive-menu li ul li a { padding-left: 5px; font-size: 1em;}
 	.responsive-menu li:hover > ul { display: block; }
@@ -380,25 +440,32 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4C000000,endCol
 		
     	position: relative;
     	bottom: 0px;
-    	width: 90%;
+    	width: 100%;
     	left: 0px;    	
 	   	background: #4e4e4e;
 	   	padding: 0px 5% ;
 	   
 		
 	}
+	
+	
 
 	.flexslider  article header h1 {
-		position: relative;
-		float: left;
-		margin-top: 5px;
-    	color: white;
-		font-size: 15px;
+		font-size: 1.5em;
 	}
 
  	a.evomenulink {
 		width: 100%;
 	}
+	/* Tabs en móvil. Vertical Tabs */
+		.tabs { height: auto; border-bottom: 1px solid #e6e6e6; }
+		.tabs dt, .tabs dd, .tabs li { float: none; height: auto; }
+		.tabs dd, .tabs li { border-left: 3px solid #cccccc; }
+		.tabs dd a, .tabs li a { background: #f2f2f2; border: none; border: 1px solid #e6e6e6; border-width: 1px 1px 0 0; color: #555; display: block; font-size: 14px; height: auto; line-height: 1; padding: 15px 20px; -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset; -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset; }
+		.tabs dd.active, .tabs li.active { margin-top: 0; border-top: 1px solid #4d4d4d; border-left: 4px solid #1a1a1a; }
+		.tabs dd.active a, .tabs li.active a { background: #4d4d4d; border: none; color: #fff; height: auto; margin: 0; position: static; top: 0; -webkit-box-shadow: 0 0 0; -moz-box-shadow: 0 0 0; box-shadow: 0 0 0; }
+		.tabs dd:first-child a.active, .tabs li:first-child a.active { margin: 0; }
+
 
 
 } 

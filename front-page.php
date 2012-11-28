@@ -38,4 +38,11 @@
 
     </div>
 </div>
+<?php
+    /*
+     * Action para añadir los widgets en la página principal
+     */
+    evora_frontpage_sidebar();
+?>
+
 <?php get_footer(); ?>
