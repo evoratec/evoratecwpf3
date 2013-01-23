@@ -3,21 +3,21 @@
 // directorio del tema. Ruta completa. Nos sirve para incluir las diferentes librerias
 define(TEMPLATE_DIR,get_bloginfo('template_directory'));
 define(THEMEEVORA, dirname(__FILE__));
+
+
+// Procesador Less para PHP
 require_once( THEMEEVORA .'/less/lessc.inc.php');
 require_once (THEMEEVORA . '/less/evowpfless.php');
 
-// Localización del tema / theme localization
-add_action('after_setup_theme', 'evoratec_lenguaje_theme');
-function evoratec_lenguaje_theme(){
-    load_theme_textdomain('evoratecwpf3', get_template_directory() . '/languages');
-}
+show_admin_bar(FALSE);
 
+// Shortcodes
+include('shortcodes.php');
 
 //Añadimos soporte para los menús de wp 3.0
 add_theme_support('nav-menus' );
 add_theme_support('post-thumbnails');
 // Add theme support for Automatic Feed Links
-
 add_theme_support( 'automatic-feed-links' );
 
 // Habilita los shortcodes en los widgets de texto
@@ -26,14 +26,18 @@ add_filter('widget_text', 'do_shortcode');
 $dirtemplate = get_bloginfo('template_directory');
 
 
+// Localización del tema / theme localization
+function evoratec_lenguaje_theme(){
+    load_theme_textdomain('evoratecwpf3', get_template_directory() . '/languages');
+}
+add_action('after_setup_theme', 'evoratec_lenguaje_theme');
+
 // ---------- "Child Theme Options" menu STARTS HERE
-
-add_action('admin_menu' , 'childtheme_add_admin');
-
 function childtheme_add_admin() {
     add_submenu_page('themes.php', 'Opciones', 'Opciones', 'edit_themes', basename(__FILE__), 'childtheme_admin');
 }
-
+add_action('admin_menu' , 'childtheme_add_admin');
+// Heredado de thematic
 function childtheme_admin() {
 
     $child_theme_image = get_option('child_theme_image');
@@ -101,7 +105,7 @@ function childtheme_admin() {
 
 
 
-
+// Slider con FlexSlider
 
 function evora_slider() {
     global $post ;
@@ -214,7 +218,7 @@ add_filter('the_generator','remove_generators');
 function evoratec_before_header() {
     do_action('evoratec_before_header');
 }
-// evoratec
+// evoratec hook header
 function evoratec_header() {
 	do_action('evoratec_header');
 }
@@ -223,10 +227,8 @@ function evoratec_header_init(){
 		<!-- Header Row -->
 		<div id="row-header">
 		<div class="row">
-			
 				<!-- Header Column -->
 				<div class="twelve columns" id="access" role="navigation">
-				
 					<!-- Site Description & Title -->
 					<hgroup id="header">
                     <?php
@@ -236,7 +238,6 @@ function evoratec_header_init(){
                         } else
                         {
                     ?>
-
 
 						<h1><a href="<?php echo site_url(); ?>"><?php bloginfo('title'); ?></a></h1>
 						<h4 class="subheader"><?php bloginfo('description'); ?></h4>
@@ -259,7 +260,7 @@ function evoratec_header_init(){
 }
 add_action('evoratec_header','evoratec_header_init');
 
-
+// Definimos hooks
 function evoratec_before_main() {
 	do_action('evoratec_before_main');
 }
@@ -298,18 +299,14 @@ add_filter( 'nav_menu_css_class', 'add_parent_url_menu_class', 10, 2 );
 function add_parent_url_menu_class( $classes = array(), $item = false ) {
     // Get current URL
     $current_url = current_url();
-
     // Get homepage URL
     $homepage_url = trailingslashit( get_bloginfo( 'url' ) );
-
     // Exclude 404 and homepage
     if( is_404() or $item->url == $homepage_url ) return $classes;
-
     if ( strstr( $current_url, $item->url) ) {
         // Add the 'parent_url' class
         $classes[] = 'parent_url';
     }
-
     return $classes;
 }
 
@@ -330,11 +327,6 @@ function current_url() {
 
 // Disable the admin bar, set to true if you want it to be visible.
 
-show_admin_bar(FALSE);
-
-// Shortcodes
-
-include('shortcodes.php');
 
 
 

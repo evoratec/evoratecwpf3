@@ -33,7 +33,8 @@ function evowpf_less_css( $less = "", $args = array() ) {
     if ( file_exists( STYLESHEETPATH . '/' . $output_name ) && filemtime( STYLESHEETPATH . '/' . $less ) > filemtime( STYLESHEETPATH . '/' . $output_name ) ) $changed = true;
     if ( $force ) $changed = true;
     try {
-        lessc::ccompile( STYLESHEETPATH . '/' . $less, STYLESHEETPATH . '/' . $output_name, $force );
+        $lesscomp = new lessc;
+        $lesscomp->checkedCompile( STYLESHEETPATH . '/' . $less, STYLESHEETPATH . '/' . $output_name);
     } catch ( Exception $ex ) {
         wp_die( '<strong>#BW LESS-CSS:</strong> lessc fatal error<br />' . $ex->getMessage() );
     }
