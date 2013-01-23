@@ -11,7 +11,7 @@
         if ( $_COOKIE['wp-postpass_' . COOKIEHASH] != $post->post_password ) :
 	?>
                 
-    <div class="alert-box warning nopassword"><?php _e('This post is password protected. Enter the password to view any comments.', 'Foundation') ?></div>
+    <div class="alert-box warning nopassword"><?php _e('This post is password protected. Enter the password to view any comments.', 'evoratecwpf3') ?></div>
             
 </div>
 
@@ -34,7 +34,7 @@ endif;
  
  <!-- Begin Comments List -->
 <div id="comments-list" class="comments">
-	<h4 class="subheader"><?php printf($comment_count > 1 ? __('<span>%d</span> Comments', 'Foundation') : __('<span>One</span> Comment', 'Foundation'), $comment_count) ?></h4>
+	<h4 class="subheader"><?php printf($comment_count > 1 ? __('<span>%d</span> Comments', 'evoratecwpf3') : __('<span>One</span> Comment', 'evoratecwpf3'), $comment_count) ?></h4>
  
 	<!-- Begin Navigation (Above) -->
 	<?php $total_pages = get_comment_pages_count(); if ( $total_pages > 1 ) : ?>
@@ -66,7 +66,7 @@ endif;
 <?php if ( ! empty($comments_by_type['pings']) ) : ?>
  
 	<div id="trackbacks-list" class="comments">
-                    <h3><?php printf($ping_count > 1 ? __('<span>%d</span> Trackbacks', 'Foundation') : __('<span>One</span> Trackback', 'Foundation'), $ping_count) ?></h3>
+                    <h3><?php printf($ping_count > 1 ? __('<span>%d</span> Trackbacks', 'evoratecwpf3') : __('<span>One</span> Trackback', 'evoratecwpf3'), $ping_count) ?></h3>
  
 <?php /* An ordered list of our custom trackbacks callback, custom_pings(), in functions.php   */ ?>
                     <ol>
@@ -84,7 +84,7 @@ endif;
                 <fieldset>
                 <legend>
                 <h4 class="subheader">
-                	<?php comment_form_title( __('Post a Comment', 'Foundation'), __('Post a Reply to %s', 'Foundation') ); ?>
+                	<?php comment_form_title( __('Post a Comment', 'evoratecwpf3'), __('Post a Reply to %s', 'evoratecwpf3') ); ?>
                 </h4>
                 </legend>
                  
@@ -92,7 +92,7 @@ endif;
                     <div id="cancel-comment-reply"><?php cancel_comment_reply_link() ?></div>
  
 <?php if ( get_option('comment_registration') && !$user_ID ) : ?>
-                    <p id="login-req"><?php printf(__('You must be <a href="%s" title="Log in">logged in</a> to post a comment.', 'Foundation'),
+                    <p id="login-req"><?php printf(__('You must be <a href="%s" title="Log in">logged in</a> to post a comment.', 'evoratecwpf3'),
                     get_option('siteurl') . '/wp-login.php?redirect_to=' . get_permalink() ) ?></p>
  
 <?php else : ?>
@@ -103,44 +103,44 @@ endif;
                         <form class="nice" action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post">
  
 <?php if ( $user_ID ) : ?>
-                            <p id="login"><?php printf(__('<span class="loggedin">Logged in as <a href="%1$s" title="Logged in as %2$s">%2$s</a>.</span> <span class="logout"><a href="%3$s" title="Log out of this account">Log out?</a></span>', 'Foundation'),
+                            <p id="login"><?php printf(__('<span class="loggedin">Logged in as <a href="%1$s" title="Logged in as %2$s">%2$s</a>.</span> <span class="logout"><a href="%3$s" title="Log out of this account">Log out?</a></span>', 'evoratecwpf3'),
                                 get_option('siteurl') . '/wp-admin/profile.php',
                                 wp_specialchars($user_identity, true),
                                 wp_logout_url(get_permalink()) ) ?></p>
  
 <?php else : ?>
  
-                            <p id="comment-notes"><?php _e('Your email is <em>never</em> published nor shared.', 'Foundation') ?> <?php if ($req) _e('Required fields are marked <span class="required">*</span>', 'Foundation') ?></p>
+                            <p id="comment-notes"><?php _e('Your email is <em>never</em> published nor shared.', 'evoratecwpf3') ?> <?php if ($req) _e('Required fields are marked <span class="required">*</span>', 'evoratecwpf3') ?></p>
  
               <div id="form-section-author" class="form-section">
-                                <div class="form-label"><label for="author"><?php _e('Name', 'Foundation') ?><?php if ($req) _e('<span class="required">*</span>', 'Foundation') ?></label></div>
+                                <div class="form-label"><label for="author"><?php _e('Name', 'evoratecwpf3') ?><?php if ($req) _e('<span class="required">*</span>', 'evoratecwpf3') ?></label></div>
                                 <div class="form-input"><input class="nice" id="author" name="author" type="text" value="<?php echo $comment_author ?>" size="30" maxlength="20" tabindex="3" /></div>
               </div><!-- #form-section-author .form-section -->
  
               <div id="form-section-email" class="form-section">
-                                <div class="form-label"><label for="email"><?php _e('Email', 'Foundation') ?><?php if ($req) _e('<span class="required">*</span>', 'Foundation') ?></label></div>
+                                <div class="form-label"><label for="email"><?php _e('Email', 'evoratecwpf3') ?><?php if ($req) _e('<span class="required">*</span>', 'evoratecwpf3') ?></label></div>
                                 <div class="form-input"><input id="email" name="email" type="text" value="<?php echo $comment_author_email ?>" size="30" maxlength="50" tabindex="4" /></div>
               </div><!-- #form-section-email .form-section -->
  
               <div id="form-section-url" class="form-section">
-                                <div class="form-label"><label for="url"><?php _e('Website', 'Foundation') ?></label></div>
+                                <div class="form-label"><label for="url"><?php _e('Website', 'evoratecwpf3') ?></label></div>
                                 <div class="form-input"><input class="nice" id="url" name="url" type="text" value="<?php echo $comment_author_url ?>" size="30" maxlength="50" tabindex="5" /></div>
               </div><!-- #form-section-url .form-section -->
  
 <?php endif /* if ( $user_ID ) */ ?>
  
               <div id="form-section-comment" class="form-section">
-                                <div class="form-label"><label for="comment"><?php _e('Comment', 'Foundation') ?></label></div>
+                                <div class="form-label"><label for="comment"><?php _e('Comment', 'evoratecwpf3') ?></label></div>
                                 <div class="form-textarea"><textarea id="comment" name="comment" cols="45" rows="8" tabindex="6"></textarea></div>
               </div><!-- #form-section-comment .form-section -->
  
               <div id="form-allowed-tags" class="form-section">
-                  <p><span><?php _e('You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:', 'Foundation') ?></span> <code><?php echo allowed_tags(); ?></code></p>
+                  <p><span><?php _e('You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:', 'evoratecwpf3') ?></span> <code><?php echo allowed_tags(); ?></code></p>
               </div>
  
 <?php do_action('comment_form', $post->ID); ?>
  
-                            <div class="form-submit"><button class="nice button" name="submit" tabindex="7"><?php _e('Post Comment', 'Foundation') ?></button><input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>" /></div>
+                            <div class="form-submit"><button class="nice button" name="submit" tabindex="7"><?php _e('Post Comment', 'evoratecwpf3') ?></button><input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>" /></div>
  
 <?php comment_id_fields(); ?>  
  

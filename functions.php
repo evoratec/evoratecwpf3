@@ -269,8 +269,6 @@ function menu_evora() {
 }
 
 function menu_principal(){ ?>
-
-
 	<div id="menu-header">					
     <?php  wp_nav_menu( array( 'theme_location' => 'menu_principal',
                                'menu'=>'menu_es',
@@ -281,6 +279,53 @@ function menu_principal(){ ?>
 	<?php
 }
 add_action('menu_evora','menu_principal');
+
+//Replaces "current-menu-item" with "active"
+function current_to_active($text){
+    $replace = array(
+        //List of menu item classes that should be changed to "active"
+        'current_page_item' => 'active',
+        'current_page_parent' => 'active',
+        'current_page_ancestor' => 'active',
+    );
+    $text = str_replace(array_keys($replace), $replace, $text);
+    return $text;
+}
+add_filter ('wp_nav_menu','current_to_active');
+
+add_filter( 'nav_menu_css_class', 'add_parent_url_menu_class', 10, 2 );
+
+function add_parent_url_menu_class( $classes = array(), $item = false ) {
+    // Get current URL
+    $current_url = current_url();
+
+    // Get homepage URL
+    $homepage_url = trailingslashit( get_bloginfo( 'url' ) );
+
+    // Exclude 404 and homepage
+    if( is_404() or $item->url == $homepage_url ) return $classes;
+
+    if ( strstr( $current_url, $item->url) ) {
+        // Add the 'parent_url' class
+        $classes[] = 'parent_url';
+    }
+
+    return $classes;
+}
+
+function current_url() {
+    // Protocol
+    $url = ( 'on' == $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
+
+    $url .= $_SERVER['SERVER_NAME'];
+
+    // Port
+    $url .= ( '80' == $_SERVER['SERVER_PORT'] ) ? '' : ':' . $_SERVER['SERVER_PORT'];
+
+    $url .= $_SERVER['REQUEST_URI'];
+
+    return trailingslashit( $url );
+}
 
 
 // Disable the admin bar, set to true if you want it to be visible.
@@ -337,6 +382,14 @@ if (function_exists('register_sidebar')) {
         'before_title' => '<h4>',
         'after_title' => '</h4>',
     ));
+    register_sidebar(array(
+        'name'=> 'Frontpage Right sidebar',
+        'id' => 'fps_right',
+        'before_widget' => '',
+        'after_widget' => '',
+        'before_title' => '<h4>',
+        'after_title' => '</h4>',
+    ));
 }
 
 
@@ -347,6 +400,11 @@ function evora_frontpage_sidebar_init(){
     if ( is_active_sidebar( 'fps_left' ) ) {
         echo '<div class="six columns">';
         dynamic_sidebar( 'fps_left' );
+        echo '</div>';
+    }
+    if ( is_active_sidebar( 'fps_right' ) ) {
+        echo '<div class="six columns">';
+        dynamic_sidebar( 'fps_right' );
         echo '</div>';
     }
     echo '</div>';
@@ -361,20 +419,20 @@ function custom_comments($comment, $args, $depth) {
   ?>
     <li id="comment-<?php comment_ID() ?>" <?php comment_class() ?>>
         <div class="comment-author vcard"><?php commenter_link() ?></div>
-        <div class="comment-meta"><?php printf(__('Posted %1$s at %2$s <span class="meta-sep">|</span> <a href="%3$s" title="Permalink to this comment">Permalink</a>', 'Foundation'),
+        <div class="comment-meta"><?php printf(__('Posted %1$s at %2$s <span class="meta-sep">|</span> <a href="%3$s" title="Permalink to this comment">Permalink</a>', 'evoratecwpf3'),
                     get_comment_date(),
                     get_comment_time(),
                     '#comment-' . get_comment_ID() );
-                    edit_comment_link(__('Edit', 'Foundation'), ' <span class="meta-sep">|</span> <span class="edit-link">', '</span>'); ?></div>
-  <?php if ($comment->comment_approved == '0') _e("\t\t\t\t\t<span class='unapproved'>Your comment is awaiting moderation.</span>\n", 'Foundation') ?>
+                    edit_comment_link(__('Edit', 'evoratecwpf3'), ' <span class="meta-sep">|</span> <span class="edit-link">', '</span>'); ?></div>
+  <?php if ($comment->comment_approved == '0') _e("\t\t\t\t\t<span class='unapproved'>Your comment is awaiting moderation.</span>\n", 'evoratecwpf3') ?>
           <div class="comment-content">
             <?php comment_text() ?>
         </div>
         <?php // echo the comment reply link
             if($args['type'] == 'all' || get_comment_type() == 'comment') :
                 comment_reply_link(array_merge($args, array(
-                    'reply_text' => __('Reply','Foundation'),
-                    'login_text' => __('Log in to reply.','Foundation'),
+                    'reply_text' => __('Reply','evoratecwpf3'),
+                    'login_text' => __('Log in to reply.','evoratecwpf3'),
                     'depth' => $depth,
                     'before' => '<div class="comment-reply-link">',
                     'after' => '</div>'
@@ -420,7 +478,7 @@ add_action( 'add_meta_boxes', 'orbit_create_slide_metaboxes' );
 add_action( 'save_post', 'orbit_slider_save_meta', 1, 2 );
 
 function orbit_create_slide_metaboxes() {
-    add_meta_box( 'orbit_slider_metabox_1', __( 'Link', 'orbit-slider' ), 'orbit_slider_metabox_1', 'Orbit', 'normal', 'default' );
+    add_meta_box( 'orbit_slider_metabox_1', __( 'Link', 'evoratecwpf3' ), 'orbit_slider_metabox_1', 'Orbit', 'normal', 'default' );
 }
 
 /**
@@ -436,7 +494,7 @@ function orbit_slider_metabox_1() {
     $slide_link_url = get_post_meta( $post->ID, '_slide_link_url', true ); ?>
 
     <p>URL: <input type="text" style="width: 90%;" name="slide_link_url" value="<?php echo esc_attr( $slide_link_url ); ?>" /></p>
-    <span class="description"><?php echo _e( 'The URL this slide should link to.', 'orbit-slider' ); ?></span>
+    <span class="description"><?php echo _e( 'The URL this slide should link to.', 'evoratecwpf3' ); ?></span>
 
 <?php }
 
@@ -467,27 +525,27 @@ function evoratec_register_sidebars() {
     ));
 
     register_sidebar( array(
-        'name' => __('Pie 1', 'example'),
+        'name' => __('Pie 1', 'evoratecwpf3'),
         'id' => 'pie_1',
-        'description' => __('The main widget area, most often used as a sidebar.', 'example'),
+        'description' => __('The main widget area, most often used as a sidebar.', 'evoratecwpf3'),
         'before_widget' => '<div id="%1$s" class="column widget %2$s widget-%2$s  ">',
         'after_widget' => '</div>',
         'before_title' => '<h3 class="widget-title">',
         'after_title' => '</h3>'
     ) );
     register_sidebar( array(
-        'name' => __('Pie 2', 'example'),
+        'name' => __('Pie 2', 'evoratecwpf3'),
         'id' => 'pie_2',
-        'description' => __('The main widget area, most often used as a sidebar.', 'example'),
+        'description' => __('The main widget area, most often used as a sidebar.', 'evoratecwpf3'),
         'before_widget' => '<div id="%1$s" class="column widget %2$s widget-%2$s  ">',
         'after_widget' => '</div>',
         'before_title' => '<h3 class="widget-title">',
         'after_title' => '</h3>'
     ) );
     register_sidebar( array(
-        'name' => __('Pie 3', 'example'),
+        'name' => __('Pie 3', 'evoratecwpf3'),
         'id' => 'pie_3',
-        'description' => __('The main widget area, most often used as a sidebar.', 'example'),
+        'description' => __('The main widget area, most often used as a sidebar.', 'evoratecwpf3'),
         'before_widget' => '<div id="%1$s" class="column widget %2$s widget-%2$s  ">',
         'after_widget' => '</div>',
         'before_title' => '<h3 class="widget-title">',
@@ -596,4 +654,28 @@ function evowpf_limit_words($string, $word_limit)
         array_pop($words);
     return implode(' ', $words);
 }
+
+function evo_columnas( $atts, $content = null ) {
+    extract( shortcode_atts( array(
+        'col'   => '',
+        'clase' => ''
+    ), $atts ) );
+
+    $numColumnas = 'twelve';
+    if ($col==1) $numColumnas = 'one' ;
+    if ($col==2) $numColumnas = 'two' ;
+    if ($col==3) $numColumnas = 'three' ;
+    if ($col==4) $numColumnas = 'four' ;
+    if ($col==5) $numColumnas = 'five' ;
+    if ($col==6) $numColumnas = 'six' ;
+    if ($col==7) $numColumnas = 'seven' ;
+    if ($col==8) $numColumnas = 'eight' ;
+    if ($col==9) $numColumnas = 'nine' ;
+    if ($col==10) $numColumnas = 'ten' ;
+    if ($col==11) $numColumnas = 'eleven' ;
+    if ($col==12) $numColumnas = 'twelve' ;
+
+    return '<div class="'.$numColumnas.' columns '.$clase .' ">' . do_shortcode( $content ) . '</div>';
+}
+add_shortcode('columnas', 'evo_columnas');
 ?>

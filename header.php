@@ -11,11 +11,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<!-- Set the viewport width to device width for mobile -->
 	<meta name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
-	
 
-	
-	<title><?php bloginfo('name'); ?> | <?php is_home() ? bloginfo('description') : wp_title(''); ?></title>
-	
+    <title><?php bloginfo('name'); ?> - <?php is_front_page() ? bloginfo('description') : wp_title(''); ?></title>
+
 	<link rel="apple-touch-icon" href="apple-touch-icon.png" />
 	<link rel="icon" type="image/ico" href="favicon.ico">
   
@@ -36,19 +34,15 @@
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 
-
-
 	<?php wp_head(); ?>
-
-
 
 </head>
 
 <body <?php body_class(); ?>>
 
 	<!-- Begin Container -->
+
 	<div class="container evowpf3">
-	
 		<?php
 		evoratec_header(); // hook header
 		evoratec_before_main(); //Hook before container
