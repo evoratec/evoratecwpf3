@@ -9,6 +9,22 @@ As a neat-freak designer, it's sometimes intimidating and frustrating looking at
 
 ## Authors
 
+```javascript
+
+OfertasFactory.$inject=['$http','$q','$window'];
+function OfertasFactory($http,$q,$window) {
+    var baseUrl = "api";
+    // añadimos las funciones al servicio que es lo que devolvemos
+    var Servicio = {
+        grabarOferta : grabarOferta,
+        verOfertas : verOfertas,
+        borrarOferta : borrarOferta
+    } ;
+    // devolvemos un objeto Servicio que contiene todos los procedimientos que definimos abajo.
+    return Servicio ;
+```
+
+
 **ZURB**
 
 + Foundation was made by ZURB, an interaction design and design strategy firm in Campbell, CA.
